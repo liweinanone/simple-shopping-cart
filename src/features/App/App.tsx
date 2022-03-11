@@ -1,9 +1,13 @@
-import { Products } from '@/features'
+import { Products, Cart } from '@/features'
+import { CartProvider } from '@/providers'
 
 export function App() {
     return (
         <>
-            <Products />
+            <CartProvider>
+                <Cart />
+                <Products />
+            </CartProvider>
         </>
     )
 }

@@ -1,7 +1,10 @@
+import * as React from 'react'
+
 import type { Product } from '@/types'
 
-import { Button } from '@/components/Button'
+import { Button } from '@/components'
 import { formatPrice } from '@/utils/formatPrice'
+import { useCart } from '@/hooks/useCart'
 
 interface ProductItemProps {
     product: Product
@@ -10,6 +13,7 @@ interface ProductItemProps {
 export function ProductItem({ product }: ProductItemProps) {
     const { price, currencyId, installments, currencyFormat, title } = product
     let productInstallment: null | JSX.Element = null
+    const { addProductToCart } = useCart()
 
     if (installments) {
         const installmentPrice = price / installments
@@ -25,7 +29,7 @@ export function ProductItem({ product }: ProductItemProps) {
     }
 
     function handleAddProductToCartClicked() {
-        console.log('Add product to cart')
+        addProductToCart(product)
     }
 
     return (
