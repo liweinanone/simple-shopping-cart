@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { useProducts } from '@/hooks/useProducts'
 import { ProductItem } from './ProductItem'
+import { Loader } from '@/components'
 
 export function Products() {
     const { status, products } = useProducts()
@@ -13,7 +14,7 @@ export function Products() {
             <ProductItem product={product} key={product.id} />
         ))
     } else {
-        productsContent = <div>Loader</div>
+        productsContent = <Loader />
     }
 
     return (
