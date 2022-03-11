@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+import './products.scss'
+
 import { useProducts } from '@/hooks/useProducts'
 import { ProductItem } from './ProductItem'
 import { Loader } from '@/components'

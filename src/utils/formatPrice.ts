@@ -1,6 +1,9 @@
-export function formatPrice(price: number, currencyId: string): string {
+export function formatPrice(price: number, currencyId: string): string[] {
     switch (currencyId) {
-        default:
-            return price.toFixed(2)
+        default: {
+            const formatted = price.toFixed(2).split('.')
+
+            return formatted
+        }
     }
 }

@@ -11,19 +11,22 @@ interface ProductItemProps {
 }
 
 export function ProductItem({ product }: ProductItemProps) {
-    const { price, currencyId, installments, currencyFormat, title } = product
-    let productInstallment: null | JSX.Element = null
     const { addProductToCart } = useCart()
+    const { price, currencyId, installments, currencyFormat, title, sku } = product
+    const [firstPrice, secondPrice] = formatPrice(price, currencyId)
+    let productInstallment: null | JSX.Element = null
 
     if (installments) {
         const installmentPrice = price / installments
+        const [firstPrice, secondPrice] = formatPrice(installmentPrice, currencyId)
 
         productInstallment = (
             <>
-                <span>or {installments} x </span>
-                <b>
-                    {currencyFormat} {formatPrice(installmentPrice, currencyId)}
-                </b>
+                <small>or {installments} x </small>
+                <small>{currencyFormat}</small>
+                <small>
+                    {firstPrice}.{secondPrice}
+                </small>
             </>
         )
     }
@@ -34,10 +37,19 @@ export function ProductItem({ product }: ProductItemProps) {
 
     return (
         <div className="product">
+            <div className="product__image">
+                <img
+                    src={require(`@/static/products/${sku}-1-product.webp`)}
+                    alt={title}
+                    loading="lazy"
+                />
+            </div>
             <p className="product__title">{title}</p>
             <div className="product__price">
                 <p className="product__price--full">
-                    {formatPrice(price, currencyId)}
+                    <span>{currencyFormat}</span>
+                    <b>{firstPrice}</b>
+                    <small>.{secondPrice}</small>
                 </p>
                 {productInstallment && (
                     <p className="product__price--installment">
