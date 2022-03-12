@@ -46,8 +46,6 @@ export function useCart() {
     }
 
     function checkoutCart() {
-        alert('Checkout cart')
-
         setCartProducts({})
     }
 
@@ -56,5 +54,6 @@ export function useCart() {
         removeProductFromCart,
         deleteProductFromCart,
         checkoutCart,
+        cartProducts,
     }
 }
